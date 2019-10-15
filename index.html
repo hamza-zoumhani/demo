@@ -13,19 +13,26 @@
 
 <body>
     <h1>Adding names</h1>
-    <form action="/" id="nameForm">
-        <label>Enter Name</label>
+    <div>
         <input type="text" id="firstName" name="firstName" placeholder="First name..." required>
         <input type="text" id="lastName" name="lastName" placeholder="Last name..." required>
-        <input type="submit" value="Add Name" >
-    </form>
+        <input type="submit" value="Add Name" onclick="results()">
+    </div>
 
     <script>
-        $("#nameForm").submit(function(event){
-            event.preventDefault();
-            var $form=$( this),
-                term=
-        })
+        function results() {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            document.write(firstName + " " + lastName);
+        }
+
+        function AddName() {
+            $.post('/all', {firstName, lastName}).done(function() {
+                console.log($('#firstName').val());
+                $('#firstName').val("");
+                reloadPage();
+            });
+        }
         function reloadPage() {
             $.getJSON("/all", function (data) {
                 data.forEach(function (firstName, lastName, index) {
