@@ -12,28 +12,24 @@
 </head>
 
 <body>
-    <h1>PRACTICE</h1>
-    <form method="post" action="/addname" id="nameForm">
-        <label>Enter your name</label>
-        <br>
-        <input type="text" name="firstName" placeholder="First name..." required>
-        <input type="text" name="lastName" placeholder="Last name..." required>
-        <input type="submit" value="Add Name" onclick="newName()">
+    <h1>Adding names</h1>
+    <form action="/" id="nameForm">
+        <label>Enter Name</label>
+        <input type="text" id="firstName" name="firstName" placeholder="First name..." required>
+        <input type="text" id="lastName" name="lastName" placeholder="Last name..." required>
+        <input type="submit" value="Add Name" >
     </form>
 
     <script>
-        function newName() {
-            //use jquery to fill {}
-            $.post('/todo/add', {}).done(function () {
-                console.log($('#nameForm').val());
-                $('#nameForm').val("");
-                reloadPage();
-            });
-        }
+        $("#nameForm").submit(function(event){
+            event.preventDefault();
+            var $form=$( this),
+                term=
+        })
         function reloadPage() {
-            $.getJSON("/todo/all", function (data) {
-                data.forEach(function (item, index) {
-                    $(".todolist").append("<li>" + item.task + "</li>");
+            $.getJSON("/all", function (data) {
+                data.forEach(function (firstName, lastName, index) {
+                    $(".addNew").append("<li>" + firstName.task + lastName.index + "</li>");
                 })
             });
         }
