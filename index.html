@@ -1,20 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PRACTICE</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
 </head>
+
 <body>
     <h1>PRACTICE</h1>
-    <form method="post" action="/addname">
+    <form method="post" action="/addname" id="nameForm">
         <label>Enter your name</label>
         <br>
         <input type="text" name="firstName" placeholder="First name..." required>
         <input type="text" name="lastName" placeholder="Last name..." required>
-        <input type="submit" value="Add Name">
+        <input type="submit" value="Add Name" onclick="newName()">
     </form>
-    
+
+    <script>
+        function newName() {
+            //use jquery to fill {}
+            $.post('/todo/add', {}).done(function () {
+                console.log($('#nameForm').val());
+                $('#nameForm').val("");
+                reloadPage();
+            });
+        }
+        function reloadPage() {
+            $.getJSON("/todo/all", function (data) {
+                data.forEach(function (item, index) {
+                    $(".todolist").append("<li>" + item.task + "</li>");
+                })
+            });
+        }
+        $(document).ready(function () {
+            reloadPage();
+        });
+    </script>
+
 </body>
+
 </html>
