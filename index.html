@@ -16,7 +16,7 @@
     <div>
         <input type="text" id="firstName" name="firstName" placeholder="First name..." required>
         <input type="text" id="lastName" name="lastName" placeholder="Last name..." required>
-        <input type="submit" value="Add Name" onclick="results()">
+        <input type="submit" value="Add Name" onclick="results()" >
     </div>
 
     <script>
@@ -28,8 +28,8 @@
 
         function AddName() {
             $.post('/all', {firstName, lastName}).done(function() {
-                console.log($('#firstName').val());
-                $('#firstName').val("");
+                console.log($('#firstName'+'#lastName').val());
+                $('#firstName'+'#lastName').val("");
                 reloadPage();
             });
         }
